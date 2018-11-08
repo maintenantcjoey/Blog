@@ -62,6 +62,12 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         switch ($pathinfo) {
+            case '/':
+                // app_home_index
+                return array('_route' => 'app_home_index', '_controller' => 'App\\Controller\\HomeController::index');
+                // app_lucky_home
+                return array('_route' => 'app_lucky_home', '_controller' => 'App\\Controller\\HomeController::homepage');
+                break;
             default:
                 $routes = array(
                     '/_profiler/' => array(array('_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'), null, null, null),
@@ -69,6 +75,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     '/_profiler/search_bar' => array(array('_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'), null, null, null),
                     '/_profiler/phpinfo' => array(array('_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'), null, null, null),
                     '/_profiler/open' => array(array('_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'), null, null, null),
+                    '/lucky/number' => array(array('_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'), null, null, null),
                 );
 
                 if (!isset($routes[$pathinfo])) {
