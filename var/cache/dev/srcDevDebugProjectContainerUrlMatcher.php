@@ -65,17 +65,17 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             case '/':
                 // app_home_index
                 return array('_route' => 'app_home_index', '_controller' => 'App\\Controller\\HomeController::index');
-                // app_lucky_home
-                return array('_route' => 'app_lucky_home', '_controller' => 'App\\Controller\\HomeController::homepage');
+                // index
+                return array('_route' => 'index', '_controller' => 'App\\Controller\\BlogController::index');
                 break;
             default:
                 $routes = array(
+                    '/lucky/number' => array(array('_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'), null, null, null),
                     '/_profiler/' => array(array('_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'), null, null, null),
                     '/_profiler/search' => array(array('_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'), null, null, null),
                     '/_profiler/search_bar' => array(array('_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'), null, null, null),
                     '/_profiler/phpinfo' => array(array('_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'), null, null, null),
                     '/_profiler/open' => array(array('_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'), null, null, null),
-                    '/lucky/number' => array(array('_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'), null, null, null),
                 );
 
                 if (!isset($routes[$pathinfo])) {
@@ -101,19 +101,23 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         $matchedPathinfo = $pathinfo;
         $regexList = array(
             0 => '{^(?'
+                    .'|/blog(?'
+                        .'|/page(?:/(\\d+))?(*:31)'
+                        .'|(?:/([a-z0-9-]+))?(*:56)'
+                    .')'
                     .'|/_(?'
-                        .'|error/(\\d+)(?:\\.([^/]++))?(*:38)'
-                        .'|wdt/([^/]++)(*:57)'
+                        .'|error/(\\d+)(?:\\.([^/]++))?(*:95)'
+                        .'|wdt/([^/]++)(*:114)'
                         .'|profiler/([^/]++)(?'
                             .'|/(?'
-                                .'|search/results(*:102)'
-                                .'|router(*:116)'
+                                .'|search/results(*:160)'
+                                .'|router(*:174)'
                                 .'|exception(?'
-                                    .'|(*:136)'
-                                    .'|\\.css(*:149)'
+                                    .'|(*:194)'
+                                    .'|\\.css(*:207)'
                                 .')'
                             .')'
-                            .'|(*:159)'
+                            .'|(*:217)'
                         .')'
                     .')'
                 .')$}sD',
@@ -124,13 +128,15 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 switch ($m = (int) $matches['MARK']) {
                     default:
                         $routes = array(
-                            38 => array(array('_route' => '_twig_error_test', '_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code', '_format'), null, null),
-                            57 => array(array('_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'), array('token'), null, null),
-                            102 => array(array('_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'), array('token'), null, null),
-                            116 => array(array('_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'), array('token'), null, null),
-                            136 => array(array('_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'), array('token'), null, null),
-                            149 => array(array('_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'), array('token'), null, null),
-                            159 => array(array('_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'), array('token'), null, null),
+                            31 => array(array('_route' => 'blog_list', 'page' => 1, '_controller' => 'App\\Controller\\BlogController::list'), array('page'), null, null),
+                            56 => array(array('_route' => 'blog_show', 'slug' => 'article-sans-titre', '_controller' => 'App\\Controller\\BlogController::show'), array('slug'), null, null),
+                            95 => array(array('_route' => '_twig_error_test', '_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code', '_format'), null, null),
+                            114 => array(array('_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'), array('token'), null, null),
+                            160 => array(array('_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'), array('token'), null, null),
+                            174 => array(array('_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'), array('token'), null, null),
+                            194 => array(array('_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'), array('token'), null, null),
+                            207 => array(array('_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'), array('token'), null, null),
+                            217 => array(array('_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'), array('token'), null, null),
                         );
 
                         list($ret, $vars, $requiredMethods, $requiredSchemes) = $routes[$m];
@@ -156,7 +162,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                         return $ret;
                 }
 
-                if (159 === $m) {
+                if (217 === $m) {
                     break;
                 }
                 $regex = substr_replace($regex, 'F', $m - $offset, 1 + strlen($m));

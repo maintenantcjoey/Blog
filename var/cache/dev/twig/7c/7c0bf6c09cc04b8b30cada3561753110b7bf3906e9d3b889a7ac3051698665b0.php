@@ -49,7 +49,7 @@ class __TwigTemplate_a0e4111eb45dd62beda14df1736c7525e0c673ae0b47118cffd39a2cb5e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        echo "<h1> wcs </h1>";
+        echo "<h1> NTM </h1>";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -77,6 +77,6 @@ class __TwigTemplate_a0e4111eb45dd62beda14df1736c7525e0c673ae0b47118cffd39a2cb5e
     {
         return new Twig_Source("{% extends 'base.html.twig' %}
 
-{% block body %}<h1> wcs </h1>{% endblock %}", "/home.html.twig", "/home/wilder/Bureau/blog/templates/home.html.twig");
+{% block body %}<h1> NTM </h1>{% endblock %}", "/home.html.twig", "/home/wilder/Bureau/blog/templates/home.html.twig");
     }
 }
