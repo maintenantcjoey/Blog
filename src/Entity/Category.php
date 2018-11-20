@@ -31,17 +31,6 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Girl;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Boy;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $mix;
 
     public function __construct()
     {
@@ -96,39 +85,4 @@ class Category
         return $this;
     }
 
-    public function getGirl(): ?string
-    {
-        return $this->Girl;
-    }
-
-    public function setGirl(string $Girl): self
-    {
-        $this->Girl = $Girl;
-
-        return $this;
-    }
-
-    public function getBoy(): ?string
-    {
-        return $this->Boy;
-    }
-
-    public function setBoy(string $Boy): self
-    {
-        $this->Boy = $Boy;
-
-        return $this;
-    }
-
-    public function getMix(): ?string
-    {
-        return $this->mix;
-    }
-
-    public function setMix(string $mix): self
-    {
-        $this->mix = $mix;
-
-        return $this;
-    }
 }

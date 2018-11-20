@@ -21,7 +21,9 @@ class srcDevDebugProjectContainerUrlGenerator extends Symfony\Component\Routing\
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
         'blog_list' => array(array('page'), array('page' => 1, '_controller' => 'App\\Controller\\BlogController::list'), array('page' => '\\d+'), array(array('variable', '/', '\\d+', 'page'), array('text', '/blog/page')), array(), array()),
-        'blog_show' => array(array('slug'), array('slug' => 'article-sans-titre', '_controller' => 'App\\Controller\\BlogController::show'), array('slug' => '[a-z0-9-]+'), array(array('variable', '/', '[a-z0-9-]+', 'slug'), array('text', '/blog')), array(), array()),
+        'blog_show' => array(array('slug'), array('_controller' => 'App\\Controller\\BlogController::show'), array('slug' => '[a-z0-9-]+'), array(array('variable', '/', '[a-z0-9-]+', 'slug'), array('text', '/blog')), array(), array()),
+        'blog_show_category' => array(array('category'), array('_controller' => 'App\\Controller\\BlogController::showByCategory'), array(), array(array('variable', '/', '[^/]++', 'category'), array('text', '/category')), array(), array()),
+        'blog_index' => array(array(), array('_controller' => 'App\\Controller\\BlogController::index'), array(), array(array('text', '/')), array(), array()),
         'app_home_index' => array(array(), array('_controller' => 'App\\Controller\\HomeController::index'), array(), array(array('text', '/')), array(), array()),
         'app_lucky_number' => array(array(), array('_controller' => 'App\\Controller\\LuckyController::number'), array(), array(array('text', '/lucky/number')), array(), array()),
         '_twig_error_test' => array(array('code', '_format'), array('_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code' => '\\d+'), array(array('variable', '.', '[^/]++', '_format'), array('variable', '/', '\\d+', 'code'), array('text', '/_error')), array(), array()),
